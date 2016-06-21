@@ -1,0 +1,7 @@
+@mixin padding-mixin ($some-number) {
+	padding: $some-number;
+}
+
+@mixin radius-mixin ($radius) {
+	border-radius: $radius;
+}

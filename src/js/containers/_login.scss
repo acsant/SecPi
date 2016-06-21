@@ -1,0 +1,91 @@
+@import "../../../styles/toolkit";
+
+.input:focus {
+	outline: 0;
+}
+
+.btn {
+	width: 300px;
+  	height: 45px;
+  	margin-top: 20px;
+}
+
+.btn:focus {
+	outline: 0;
+}
+
+.btn:active {
+	width: 300px;
+	height: 45px;
+	margin-top: 20px;
+}
+
+.input__next {
+	background-color: $darkish-blue-color;
+	text-align: center;
+	font-family: $font-family-bold;
+	font-size: $font-size;
+	color: $white-color;
+
+}
+
+.info {
+	display: block;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	visibility: hidden;
+}
+
+.info--small {
+	font-family: $font-family;
+	font-size: $input-size;
+}
+
+.info--bold {
+	font-family: $font-family-bold;
+	font-size: 20px;
+}
+
+.img--small {
+	height: 100px;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	visibility: hidden;
+}
+
+.form {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.input {
+	width: 247px;
+  	height: 41px;
+  	display: block;
+  	padding-left:  50px;
+  	vertical-align: middle;
+  	margin-top: 20px;
+  	position: relative;
+  	font-family: $font-family;
+  	font-size: $input-size;
+	object-fit: contain;
+}
+
+.input__email {
+	background: url('../../../images/email.svg') no-repeat scroll 20px 20px;
+  	background-position: 15px;
+}
+
+.input__password {
+	background: url('../../../images/passwordimg.svg') no-repeat scroll 20px 20px;
+  	background-position: 15px;
+}
+
+.input--darkblueborder {
+	border-radius: 100px;
+	border: solid 1px $darkish-blue-color;
+}
