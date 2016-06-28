@@ -11,8 +11,9 @@ var user_validated = false;
 * Validate user
 * @param string username
 */
-function validate (username, password) {
-	if (username == 'acsant@uwaterloo.ca' && password == 'akash') {
+function validate (username) {
+	// Validate username
+	if (username == 'acsant@uwaterloo.ca') {
 		user_validated = true;
 	}
 	user_validated = false;
@@ -35,7 +36,15 @@ var AuthenticationStore = assign({}, EventEmitter.prototype, {
 		var action = payload.action;
 
 		switch (action.type) {
-			
+			case AuthenticationConstants.VALIDATE:
+				validate(action.username);
+				break;
+
+			case AuthenticationConstants.LOGIN:
+				login(action.username, action.password);
+				break;
+
+			default:
 		}
 		return true;
 	});
