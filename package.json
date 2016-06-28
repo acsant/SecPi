@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "css": "^2.2.1",
+    "events": "^1.1.0",
+    "keymirror": "^0.1.1",
     "node-sass": "^3.7.0",
     "object-assign": "^4.1.0",
     "react": "^15.1.0",
