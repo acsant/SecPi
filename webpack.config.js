@@ -5,7 +5,7 @@ var BUILD_DIR = path.resolve(__dirname, 'dist');
 module.exports = {
   entry: [
     'webpack-hot-middleware/client',
-    './main.js'
+    './src/js/main.js'
   ],
   output: { 
     path: BUILD_DIR,
@@ -36,4 +36,7 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    historyApiFallback: true
+  }
 };

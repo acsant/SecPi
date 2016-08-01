@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Link} from 'react-router';
 
 require('./_login.scss');
 require('react-bootstrap');
 
-var Bttn = require('react-bootstrap/lib/Button')
+import Home from './home.jsx';
+
+var Bttn = require('react-bootstrap/lib/Button');
 let username, password
  
 class Login extends React.Component {
@@ -37,11 +40,11 @@ class Login extends React.Component {
     					password = node
     				}} />
 
-    				<Bttn type="submit" bsStyle="primary" className="btn input__next input--darkblueborder btn-primary"> Next </Bttn>
+    				<Link to="/home"><Bttn type="submit" bsStyle="primary" className="btn input__next input--darkblueborder btn-primary"> Next </Bttn></Link>
     			</form>
     		</div>
     	)
   }
 }
 
-ReactDOM.render(<Login/>, document.getElementById('login'));
+export default Login;
