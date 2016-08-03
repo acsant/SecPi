@@ -1,12 +1,24 @@
 import React from 'react';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-
+import { Router, Route, browserHistory, IndexRoute, createMemoryHistory } from 'react-router';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Login from '../containers/login.jsx';
 import Home from '../containers/home.jsx';
+import Header from '../containers/header.jsx';
+
+var history;
+if (typeof(window) !== 'undefined') {
+	history = browserHistory;
+} else {
+	history = createMemoryHistory();
+}
 
 export default (
-	<Router history={browserHistory}>
-		<Route path="/" component={Login} />
-		<Route path="home" component={Home} />
-	</Router>
+	<MuiThemeProvider>
+		<Router history={history}>
+			<Route path="/" component={Header}>
+				<IndexRoute component={Login}/>
+				<Route path="home" component={Home} />
+			</Route>
+		</Router>
+	</MuiThemeProvider>
 );
