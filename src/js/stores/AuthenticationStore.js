@@ -47,7 +47,7 @@ var AuthenticationStore = assign({}, EventEmitter.prototype, {
 			default:
 		}
 		return true;
-	});
+	})
 
 });
 

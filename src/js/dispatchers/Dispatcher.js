@@ -14,13 +14,13 @@ Dispatcher.prototype = assign({}, Dispatcher.prototype, {
 	register: function(callback) {
 		_callbacks.push(callback);
 		return _callbacks.length - 1;
-	}
+	},
 
 	/**
 	* Dispatch 
 	* @param  {object} payload The data from the action.
 	*/
-	dispatch: function (payload) {
+	dispatch: function(payload) {
 		// Array of promises to reference
 		var resolves = [];
 		var rejects = [];

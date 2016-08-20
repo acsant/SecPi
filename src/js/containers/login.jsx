@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router';
 
 require('./_login.scss');
 require('react-bootstrap');
@@ -72,7 +71,6 @@ class Login extends React.Component {
                                 floatingLabelText="Email"
                                 value={this.state.email}
                                 onChange={this._handleEmailChange}
-                                type="email"
                                 />
                             <br/>
                             <TextField hintText="Password"
@@ -86,6 +84,11 @@ class Login extends React.Component {
                             <RaisedButton label="Sign In"
                                 primary={true}
                                 onClick={this._formSubmit}
+                                />
+                            <br/>
+                            <br/>
+                            <RaisedButton href="/auth/facebook" 
+                                label="Facebook Login"
                                 />
 
                         </form>

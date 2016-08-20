@@ -4,10 +4,12 @@ var webpackHotMiddleware = require('webpack-hot-middleware')
 var config = require('./webpack.config')
 var express = require('express')
 var app = new express()
-var port = 3000
+var port = 8080
 var compiler = webpack(config)
 const jwt = require('express-jwt')
 const cors = require('cors')
+
+var path = require('path')
 
 var mongoose = require('mongoose')
 var passport = require('passport')
@@ -19,8 +21,10 @@ var bodyParser   = require('body-parser')
 var session      = require('express-session')
 
 var configDB = require('./database.js')
-
+import { Router, RouterContext } from 'react-router'
 mongoose.connect(configDB.url)
+
+console.log("Node Environment: ", process.env.NODE_ENV)
 
 app.use(cors())
 app.use(morgan('dev'))
@@ -36,16 +40,16 @@ app.set('views', __dirname + '/src/js/containers');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 
-const authCheck = jwt({
-	secret: new Buffer('akashtrial', 'base64'),
-	audience: '1xdyfp0rdJkstEmwcmihXADUk8zh4KEx'
-})
-
 app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}))
 app.use(webpackHotMiddleware(compiler))
 
-app.get("/", function (req, res) {
-	res.sendFile(__dirname + '/index.html')
+require('./config/passport')(passport)
+require('./config/passport_init')(passport)
+
+app.use(express.static(__dirname))
+
+app.get("/home", function (req, res) {
+	res.sendFile(path.resolve(__dirname, 'index.html'))
 })
 
 app.listen(port, function(error) {
@@ -55,3 +59,16 @@ app.listen(port, function(error) {
 		console.info("==> 🌎 Listeneing on port %s. Open http://localhost:%s/ in your browser.", port, port)
 	}
 })
+
+// Passport
+app.get('/auth/facebook', 
+	passport.authenticate('facebook', {scope: ['email']})
+)
+
+app.get('/auth/facebook/callback', 
+	passport.authenticate('facebook', {
+		successRedirect: '/home',
+		failureRedirect: '/',
+		scope: ['email']
+	})
+)

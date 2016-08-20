@@ -7,7 +7,7 @@ class Home extends React.Component {
 	render () {
 		return (
 			<div>
-				<p> Signed In </p>
+				Signed In
 			</div>
 		)
 	}
