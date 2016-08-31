@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var AuthenticationConstants = require('../constants/AuthenticationConstants');
 var assign = require('object-assign');
+var User = require('../models/user');
 
 var CHANGE_EVENT  = 'change';
 
@@ -13,10 +14,23 @@ var user_validated = false;
 */
 function validate (username) {
 	// Validate username
-	if (username == 'acsant@uwaterloo.ca') {
-		user_validated = true;
-	}
-	user_validated = false;
+	User.findOne({'email': username}, function (err, user) {
+		if (user) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+	return false;
+}
+
+/**
+* Login Facebook User
+* @param string username, password
+*/
+function loginFacebook () {
+	// Login user
+	passport.authenticate('facebook', {scope: ['email']});
 }
 
 var AuthenticationStore = assign({}, EventEmitter.prototype, {
@@ -41,7 +55,7 @@ var AuthenticationStore = assign({}, EventEmitter.prototype, {
 				break;
 
 			case AuthenticationConstants.LOGIN:
-				login(action.username, action.password);
+				loginFacebook();
 				break;
 
 			default:

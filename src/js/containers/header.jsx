@@ -17,6 +17,7 @@ class Header extends React.Component {
 	render () {
 		let _title = "SecPi";
 		let _signIn = "Sign In";
+		let _signUp ="Sign Up";
 		return (
 			<div id="page_container">
 				<AppBar
@@ -30,6 +31,12 @@ class Header extends React.Component {
 					<Link to="/" className="a__link">
 						<span>
 							{_signIn}
+						</span>
+					</Link>
+					&nbsp;
+					<Link to="/signup" className="a__link link--signup">
+						<span>
+							{_signUp}
 						</span>
 					</Link>
 

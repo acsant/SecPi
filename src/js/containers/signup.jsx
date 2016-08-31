@@ -3,25 +3,30 @@ import ReactDOM from 'react-dom';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-var {_handleEmailChange, _handlePasswordChange} = require('../services/AuthenticationService');
+var {_handleFirstNameChange, _handleLastNameChange} = require('../services/AuthenticationService');
+var {_handleEmailChange, _handlePasswordChange, _handleConfirmedPassword} = require('../services/AuthenticationService');
 
 require('./_login.scss');
 require('react-bootstrap');
- 
-class Login extends React.Component {
 
-    constructor(props, context){
+class Signup extends React.Component {
+	constructor(props, context){
         super(props, context);
         this.state={};
         this.state.error="";
         this.state.email="";
         this.state.password="";
+        this.state.confirmPassword="";
+        this.state.firstName="";
+        this.state.lastName="";
         this.history=props.history;
         this.showSessionMsg=props.location.query ? props.location.query.session:true;
+        this._handleFirstNameChange = _handleFirstNameChange.bind(this);
+        this._handleLastNameChange = _handleLastNameChange.bind(this);
         this._handlePasswordChange = _handlePasswordChange.bind(this);
         this._handleEmailChange = _handleEmailChange.bind(this);
+        this._handleConfirmedPassword = _handleConfirmedPassword.bind(this);
         this._formSubmit = this._formSubmit.bind(this);
-        console.log("login called");
     }
 
     _formSubmit(e) {
@@ -32,7 +37,7 @@ class Login extends React.Component {
         }
     }
 
-    render() {
+	render() {
     return (
     		<div className="container div__marginTop">
                 <Paper zDepth={1} className="paper__mediaPiece">
@@ -40,6 +45,20 @@ class Login extends React.Component {
                         <h3>Sign In</h3>
 
                         <form>
+                        	<TextField hintText="First Name"
+                                floatingLabelText="First Name"
+								errorText={this.state.errorFirstName}
+                                value={this.state.firstName}
+                                onChange={this._handleFirstNameChange}
+                                />
+                            <br/>
+                            <TextField hintText="Last Name"
+                                floatingLabelText="Last Name"
+                                errorText={this.state.errorLastName}
+                                value={this.state.lastName}
+                                onChange={this._handleLastNameChange}
+                                />
+                            <br/>
                             <TextField hintText="Email"
                                 errorText={this.state.errorEmail}
                                 floatingLabelText="Email"
@@ -55,16 +74,20 @@ class Login extends React.Component {
                                 type="password"
                                 />
                             <br/>
-                            <RaisedButton label="Sign In"
+                            <TextField hintText="Confirm Password"
+                            	errorText={this.state.errorConfirmPass}
+                            	floatingLabelText="Confirm Password"
+                            	onChange={this._handleConfirmedPassword}
+                            	value={this.state.confirmPassword}
+                            	type="password"
+                            	/>
+                            <br/>
+                            <br/>
+                            <RaisedButton label="Sign Up"
                                 primary={true}
                                 onClick={this._formSubmit}
                                 />
                             <br/>
-                            <br/>
-                            <RaisedButton href="/auth/facebook" 
-                                label="Facebook Login"
-                                />
-
                         </form>
                     </div>
                 </Paper>
@@ -73,4 +96,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Signup;

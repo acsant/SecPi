@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Login from '../containers/login.jsx';
 import Home from '../containers/home.jsx';
 import Header from '../containers/header.jsx';
+import Signup from '../containers/signup.jsx';
 
 var history;
 if (typeof(window) !== 'undefined') {
@@ -17,6 +18,7 @@ export default (
 		<Router history={history}>
 			<Route path="/" component={Header}>
 				<IndexRoute component={Login}/>
+				<Route path="signup" component={Signup} />
 				<Route path="home" component={Home} />
 			</Route>
 		</Router>
