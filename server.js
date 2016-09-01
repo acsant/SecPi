@@ -52,6 +52,10 @@ app.get("/home", function (req, res) {
 	res.sendFile(path.resolve(__dirname, 'index.html'))
 })
 
+app.get("/signup", function (req, res) {
+	res.sendFile(path.resolve(__dirname, 'index.html'),  {message: req.flash('signupMessage')})
+})
+
 app.listen(port, function(error) {
 	if (error) {
 		console.error(error)
@@ -59,6 +63,18 @@ app.listen(port, function(error) {
 		console.info("==> 🌎 Listeneing on port %s. Open http://localhost:%s/ in your browser.", port, port)
 	}
 })
+
+app.post('/signup', passport.authenticate('local-signup', {
+	successRedirect: '/',
+	failureRedirect: '/signup',
+	failureFlash: true
+}))
+
+app.post('/login', passport.authenticate('local-login', {
+	successRedirect: '/home',
+	failureRedirect: '/signup',
+	failureFlash: true
+}))
 
 // Passport
 app.get('/auth/facebook', 

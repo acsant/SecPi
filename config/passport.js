@@ -1,5 +1,4 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
-var bCrypt = require('bcrypt-nodejs');
 
 var User = require('../models/user');
 
@@ -19,7 +18,7 @@ module.exports = function (passport) {
 			console.log('profile', profile);
 
 			process.nextTick(function () {
-				User.findOne({'id': profile.id}, function (err, user) {
+				User.findOne({'fb.id': profile.id}, function (err, user) {
 					if (err)
 						return done(err);
 					if (user) {
@@ -44,8 +43,4 @@ module.exports = function (passport) {
 			});
 		}	
 	));
-
-	var isValidPassword = function(user, password){
-        return bCrypt.compareSync(password, user.password);
-    }
 }

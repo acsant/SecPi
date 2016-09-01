@@ -9,19 +9,26 @@ var CHANGE_EVENT  = 'change';
 var user_validated = false;
 
 /**
-* Validate user
-* @param string username
+* validate user
+* @param string email
 */
-function validate (username) {
-	// Validate username
-	User.findOne({'email': username}, function (err, user) {
+function validate (email, password) {
+	User.findOne({'email': email}, function (err, user) {
 		if (user) {
-			return true;
-		} else {
-			return false;
+			if (user.local.password == password) {
+				return true;
+			}
 		}
+		return false;
 	});
-	return false;
+}
+
+/**
+* login user locally
+* @param string username, password
+*/
+function loginLocally (username, password) {
+	return AuthenticationStore.validate(username, password);
 }
 
 /**
@@ -50,12 +57,10 @@ var AuthenticationStore = assign({}, EventEmitter.prototype, {
 		var action = payload.action;
 
 		switch (action.type) {
-			case AuthenticationConstants.VALIDATE:
-				validate(action.username);
-				break;
 
-			case AuthenticationConstants.LOGIN:
-				loginFacebook();
+			case AuthenticationConstants.LOCAL_LOGIN:
+				loginLocally(action.username, action.password);
+				AuthenticationStore.emitChange();
 				break;
 
 			default:

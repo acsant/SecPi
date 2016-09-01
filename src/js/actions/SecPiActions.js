@@ -6,7 +6,7 @@ var SecPiActions = {
 	*	Start live security feed
 	*/
 	startFeed: function () {
-		AppDispatcher.dispatch({
+		AppDispatcher.handleStartFeedAction({
 			actionType: SecPiConstants.STARTFEED
 		});
 	},
@@ -14,8 +14,8 @@ var SecPiActions = {
 	/**
 	*	Stop live feed
 	*/
-	stopFeed: function (username, password) {
-		AppDispatcher.dispatch({
+	stopFeed: function () {
+		AppDispatcher.handleStopFeedAction({
 			actionType: SecPiConstants.STOPFEED
 		});
 	}
@@ -26,7 +26,7 @@ var SecPiActions = {
 	* @param {string} password
 	*/
 	localLogin: function (email, password) {
-		AppDispatcher.dispatch({
+		AppDispatcher.handleLocalLogin({
 			actionType: SecPiConstants.LOGIN,
 			username: email,
 			password: this.password

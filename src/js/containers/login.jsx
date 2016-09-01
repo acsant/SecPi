@@ -20,16 +20,7 @@ class Login extends React.Component {
         this.showSessionMsg=props.location.query ? props.location.query.session:true;
         this._handlePasswordChange = _handlePasswordChange.bind(this);
         this._handleEmailChange = _handleEmailChange.bind(this);
-        this._formSubmit = this._formSubmit.bind(this);
         console.log("login called");
-    }
-
-    _formSubmit(e) {
-        e.preventDefault();
-        if (this.state.errorPassword == '' && this.state.errorEmail == '') {
-            this.setState({error : 'Signing in ...'});
-
-        }
     }
 
     render() {
@@ -39,7 +30,7 @@ class Login extends React.Component {
                     <div className="div__about">
                         <h3>Sign In</h3>
 
-                        <form>
+                        <form action="/login" formMethod="POST">
                             <TextField hintText="Email"
                                 errorText={this.state.errorEmail}
                                 floatingLabelText="Email"
@@ -55,9 +46,8 @@ class Login extends React.Component {
                                 type="password"
                                 />
                             <br/>
-                            <RaisedButton label="Sign In"
+                            <RaisedButton type="submit" formMethod="post" label="Sign In"
                                 primary={true}
-                                onClick={this._formSubmit}
                                 />
                             <br/>
                             <br/>

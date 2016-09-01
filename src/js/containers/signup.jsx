@@ -26,15 +26,7 @@ class Signup extends React.Component {
         this._handlePasswordChange = _handlePasswordChange.bind(this);
         this._handleEmailChange = _handleEmailChange.bind(this);
         this._handleConfirmedPassword = _handleConfirmedPassword.bind(this);
-        this._formSubmit = this._formSubmit.bind(this);
-    }
-
-    _formSubmit(e) {
-        e.preventDefault();
-        if (this.state.errorPassword == '' && this.state.errorEmail == '') {
-            this.setState({error : 'Signing in ...'});
-
-        }
+        
     }
 
 	render() {
@@ -44,29 +36,29 @@ class Signup extends React.Component {
                     <div className="div__about">
                         <h3>Sign In</h3>
 
-                        <form>
-                        	<TextField hintText="First Name"
+                        <form action='/signup' formMethod='POST'>
+                        	<TextField name='firstName' hintText="First Name"
                                 floatingLabelText="First Name"
 								errorText={this.state.errorFirstName}
                                 value={this.state.firstName}
                                 onChange={this._handleFirstNameChange}
                                 />
                             <br/>
-                            <TextField hintText="Last Name"
+                            <TextField name='lastName' hintText="Last Name"
                                 floatingLabelText="Last Name"
                                 errorText={this.state.errorLastName}
                                 value={this.state.lastName}
                                 onChange={this._handleLastNameChange}
                                 />
                             <br/>
-                            <TextField hintText="Email"
+                            <TextField name='email' hintText="Email"
                                 errorText={this.state.errorEmail}
                                 floatingLabelText="Email"
                                 value={this.state.email}
                                 onChange={this._handleEmailChange}
                                 />
                             <br/>
-                            <TextField hintText="Password"
+                            <TextField name='password' hintText="Password"
                                 errorText={this.state.errorPassword}
                                 floatingLabelText="Password"
                                 onChange={this._handlePasswordChange}
@@ -83,9 +75,8 @@ class Signup extends React.Component {
                             	/>
                             <br/>
                             <br/>
-                            <RaisedButton label="Sign Up"
+                            <RaisedButton type="submit" formMethod='post' label="Sign Up"
                                 primary={true}
-                                onClick={this._formSubmit}
                                 />
                             <br/>
                         </form>

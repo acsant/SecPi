@@ -1,4 +1,6 @@
 var facebook = require('./passport');
+var localsignup = require('./localsignup');
+var locallogin = require('./locallogin');
 var User = require('../models/user');
 
 module.exports = function (passport) {
@@ -16,4 +18,6 @@ module.exports = function (passport) {
 	});
 
 	facebook(passport);
+	localsignup(passport);
+	locallogin(passport);
 }
