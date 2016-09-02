@@ -5,6 +5,7 @@ import Login from '../containers/login.jsx';
 import Home from '../containers/home.jsx';
 import Header from '../containers/header.jsx';
 import Signup from '../containers/signup.jsx';
+import {validate} from '../services/AuthenticationService';
 
 var history;
 if (typeof(window) !== 'undefined') {
@@ -19,7 +20,7 @@ export default (
 			<Route path="/" component={Header}>
 				<IndexRoute component={Login}/>
 				<Route path="signup" component={Signup} />
-				<Route path="home" component={Home} />
+				<Route path="home" component={Home} onEnter={validate}/>
 			</Route>
 		</Router>
 	</MuiThemeProvider>

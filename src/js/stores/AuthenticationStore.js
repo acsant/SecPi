@@ -1,43 +1,25 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppDispatcher = require('../dispatchers/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var AuthenticationConstants = require('../constants/AuthenticationConstants');
+var AuthenticationConstants = require('../constants/SecPiConstants');
 var assign = require('object-assign');
-var User = require('../models/user');
 
 var CHANGE_EVENT  = 'change';
 
 var user_validated = false;
 
-/**
-* validate user
-* @param string email
-*/
-function validate (email, password) {
-	User.findOne({'email': email}, function (err, user) {
-		if (user) {
-			if (user.local.password == password) {
-				return true;
-			}
-		}
-		return false;
-	});
-}
+var auth_token = {
+	email: null,
+	token: null
+};
 
 /**
-* login user locally
-* @param string username, password
+* Login storage to store token
+* @param {string, string} email and access token - > null if locally logged in
 */
-function loginLocally (username, password) {
-	return AuthenticationStore.validate(username, password);
-}
-
-/**
-* Login Facebook User
-* @param string username, password
-*/
-function loginFacebook () {
-	// Login user
-	passport.authenticate('facebook', {scope: ['email']});
+function loginStorage (email, token) {
+	console.log('Login storage called');
+	auth_token.email = email;
+	auth_token.token = token;
 }
 
 var AuthenticationStore = assign({}, EventEmitter.prototype, {
@@ -55,11 +37,11 @@ var AuthenticationStore = assign({}, EventEmitter.prototype, {
 
 	dispatcherIndex: AppDispatcher.register(function (payload) {
 		var action = payload.action;
+		console.log(payload);
+		switch (action.actionType) {
 
-		switch (action.type) {
-
-			case AuthenticationConstants.LOCAL_LOGIN:
-				loginLocally(action.username, action.password);
+			case SecPiConstants.LOGIN:
+				loginStorage(action.username, action.token);
 				AuthenticationStore.emitChange();
 				break;
 

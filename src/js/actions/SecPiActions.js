@@ -1,4 +1,4 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppDispatcher = require('../dispatchers/AppDispatcher');
 var SecPiConstants = require('../constants/SecPiConstants');
 
 var SecPiActions = {
@@ -18,18 +18,19 @@ var SecPiActions = {
 		AppDispatcher.handleStopFeedAction({
 			actionType: SecPiConstants.STOPFEED
 		});
-	}
+	},
 
 	/**
-	* Local login
+	* Local/facebook login
 	* @param {string} email
 	* @param {string} password
 	*/
-	localLogin: function (email, password) {
-		AppDispatcher.handleLocalLogin({
+	login: function (email, access_token) {
+		console.log("login action: ", email);
+		AppDispatcher.handleLoginAction({
 			actionType: SecPiConstants.LOGIN,
 			username: email,
-			password: this.password
+			token: access_token
 		});
 	}
 

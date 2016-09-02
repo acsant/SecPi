@@ -3,5 +3,5 @@ var keyMirror = require('keymirror');
 module.exports = keyMirror({
 	STARTFEED: null,
 	STOPFEED: null,
-	LOCAL_LOGIN: null
+	LOGIN: null
 });

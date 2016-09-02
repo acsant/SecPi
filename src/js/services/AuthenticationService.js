@@ -1,3 +1,15 @@
+import { browserHistory } from 'react-router';
+
+var validate = function (nextState, replace) {
+    // if (true) {
+    //     console.log("Transitioning to login");
+    //     replace({
+    //         pathname: '/',
+    //         state: { nextPathname: nextState.location.pathname }
+    //     });
+    // }
+}
+
 var _handleEmailChange = function(e) {
     this.state.errorEmail = "";
     var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -53,6 +65,7 @@ var _handleLastNameChange = function(e) {
     this.setState({lastName: e.target.value});
 }
 
+exports.validate = validate;
 exports._handleFirstNameChange = _handleFirstNameChange;
 exports._handleLastNameChange = _handleLastNameChange;
 exports._handleEmailChange = _handleEmailChange;

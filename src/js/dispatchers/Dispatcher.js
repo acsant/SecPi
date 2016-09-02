@@ -43,4 +43,4 @@ Dispatcher.prototype = assign({}, Dispatcher.prototype, {
 	}
 });
 
-module.exports = Dispather;
+module.exports = Dispatcher;

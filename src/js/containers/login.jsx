@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import AuthenticationStore from '../stores/AuthenticationStore';
 var {_handleEmailChange, _handlePasswordChange} = require('../services/AuthenticationService');
 
 require('./_login.scss');
 require('react-bootstrap');
+
  
 class Login extends React.Component {
 
     constructor(props, context){
         super(props, context);
-        this.state={};
+        this.state={
+            loggedIn: false
+        };
         this.state.error="";
         this.state.email="";
         this.state.password="";
@@ -30,15 +34,15 @@ class Login extends React.Component {
                     <div className="div__about">
                         <h3>Sign In</h3>
 
-                        <form action="/login" formMethod="POST">
-                            <TextField hintText="Email"
+                        <form action="/" formMethod="POST">
+                            <TextField name='email' hintText="Email"
                                 errorText={this.state.errorEmail}
                                 floatingLabelText="Email"
                                 value={this.state.email}
                                 onChange={this._handleEmailChange}
                                 />
                             <br/>
-                            <TextField hintText="Password"
+                            <TextField name='password' hintText="Password"
                                 errorText={this.state.errorPassword}
                                 floatingLabelText="Password"
                                 onChange={this._handlePasswordChange}
@@ -47,7 +51,7 @@ class Login extends React.Component {
                                 />
                             <br/>
                             <RaisedButton type="submit" formMethod="post" label="Sign In"
-                                primary={true}
+                                primary={true} 
                                 />
                             <br/>
                             <br/>

@@ -16,7 +16,6 @@ module.exports = function (passport) {
 				if (user) {
 					return done(null, false, req.flash('signupMessage', 'User already exists'));
 				} else {
-					console.log("Local user db");
 					var newUser = new User();
 					newUser.local.email = email;
 					newUser.local.firstName = req.body.firstName;

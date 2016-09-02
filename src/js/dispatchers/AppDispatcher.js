@@ -11,7 +11,7 @@ var AppDispatcher = assign({}, Dispatcher.prototype, {
 			source: 'STARTFEED',
 			action: action
 		});
-	}
+	},
 
 	/**
 	* Stops the live feed
@@ -22,15 +22,16 @@ var AppDispatcher = assign({}, Dispatcher.prototype, {
 			source: 'STOPFEED',
 			action: action
 		});
-	}
+	},
 
 	/**
-	* A bridge function between the views and the dispatcher to login locally
+	* A bridge function between the views and the dispatcher to login locally or through facebook
 	* @param {object} action the data coming from the view
 	*/
-	handleLocalLoginAction: function (action) {
+	handleLoginAction: function (action) {
+		console.log("dispatcher handle login: ", action);
 		this.dispatch({
-			source: 'LOCAL_LOGIN',
+			source: 'LOGIN',
 			action: action
 		});
 	}

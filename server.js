@@ -70,7 +70,7 @@ app.post('/signup', passport.authenticate('local-signup', {
 	failureFlash: true
 }))
 
-app.post('/login', passport.authenticate('local-login', {
+app.post('/', passport.authenticate('local-login', {
 	successRedirect: '/home',
 	failureRedirect: '/signup',
 	failureFlash: true
