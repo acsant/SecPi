@@ -1,6 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/user');
-import SecPiActions from '../src/js/actions/SecPiActions';
+var SecPiActions = require('../src/js/actions/SecPiActions');
 
 var configAuth = require('./auth');
 
@@ -35,6 +35,7 @@ module.exports = function (passport) {
 						newUser.save(function (err) {
 							if (err)
 								throw err;
+
 							SecPiActions.login(newUser.fb.email, newUser.fb.access_token);
 							return done(null, newUser);
 						});

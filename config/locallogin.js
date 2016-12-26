@@ -16,8 +16,7 @@ module.exports = function (passport) {
 				if (!user) {
 					return done(null, false);
 				}
-				SecPiActions.login(user.email, null);
-				return done(null, user);
+				return done(SecPiActions.login(user.email, null), user);
 			});
 		});
 	}));

@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AuthenticationStore from '../stores/AuthenticationStore';
 var {_handleEmailChange, _handlePasswordChange} = require('../services/AuthenticationService');
+import SecPiActions from '../actions/SecPiActions';
 
 require('./_login.scss');
 require('react-bootstrap');
