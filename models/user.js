@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
 		firstName: String,
 		lastName: String,
 		email: String,
-		password: String 
+		password: String
 	}
 	,
 	fb: {
@@ -23,7 +23,6 @@ userSchema.methods.generateHash = function(password) {
 };
 
 userSchema.methods.isValidPassword = function(password) {
-	console.log(password);
 	return bcrypt.compareSync(password, this.local.password);
 };
 

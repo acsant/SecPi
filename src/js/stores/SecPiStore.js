@@ -5,30 +5,11 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT  = 'change';
 
-var user_validated = false;
+var currentStream = '';
 
-var auth_token = {
-	id: null,
-	email: null,
-	token: null
-};
-
-/**
-* Login storage to store token
-* @param {string, string} email and access token - > null if locally logged in
-*/
-var loginStorage = function (email, token) {
-	auth_token.id = id;
-	auth_token.email = email;
-	auth_token.token = token;
-};
-
-var getLoginAuthToken = function () {
-	return auth_token;
-}
-
-var AuthenticationStore = assign({}, EventEmitter.prototype, {
+var SecPiStore = assign({}, EventEmitter.prototype, {
 	emitChange: function () {
+		console.log("Change emitted");
 		this.emit(CHANGE_EVENT);
 	},
 
@@ -45,12 +26,16 @@ var AuthenticationStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function (payload) {
 	var action = payload.action;
 	switch (payload.source) {
-		case SecPiConstants.LOGIN:
-			loginStorage(action.userId, action.email, action.access_token);
-			AuthenticationStore.emitChange();
+		case SecPiConstants.GET_LIVESTREAM:
+			currentStream = action.id;
+            SecPiStore.emit(CHANGE_EVENT);
 			break;
 
+        case SecPiConstants.REQUEST_STREAM:
+            break;
+
 		default:
+            return true;
 	}
 });
 

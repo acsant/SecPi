@@ -20,7 +20,8 @@ export default (
 			<Route path="/" component={Header}>
 				<IndexRoute component={Login}/>
 				<Route path="signup" component={Signup} />
-				<Route path="home" component={Home} onEnter={validate} />
+				<Route path="home" component={Home} />
+				//<Route path="home" component={Home} onEnter={validate} />
 			</Route>
 		</Router>
 	</MuiThemeProvider>

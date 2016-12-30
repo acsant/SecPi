@@ -1,7 +1,6 @@
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-	STARTFEED: null,
-	STOPFEED: null,
+	GET_USER: 'GET_USER',
 	LOGIN: null
 });

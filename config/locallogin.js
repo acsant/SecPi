@@ -7,7 +7,7 @@ module.exports = function (passport) {
 		usernameField: 'email',
 		passwordField: 'password',
 		passReqToCallback: true
-	}, 
+	},
 	function (req, email, password, done) {
 		process.nextTick(function () {
 			User.findOne({'local.email': email}, function (err, user) {
@@ -16,7 +16,7 @@ module.exports = function (passport) {
 				if (!user) {
 					return done(null, false);
 				}
-				return done(SecPiActions.login(user.email, null), user);
+				return done(null, user);
 			});
 		});
 	}));

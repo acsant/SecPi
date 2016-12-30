@@ -10,7 +10,6 @@ import SecPiActions from '../actions/SecPiActions';
 require('./_login.scss');
 require('react-bootstrap');
 
- 
 class Login extends React.Component {
 
     constructor(props, context){
@@ -52,11 +51,11 @@ class Login extends React.Component {
                                 />
                             <br/>
                             <RaisedButton type="submit" formMethod="post" label="Sign In"
-                                primary={true} 
+                                primary={true}
                                 />
                             <br/>
                             <br/>
-                            <RaisedButton href="/auth/facebook" 
+                            <RaisedButton href="/auth/facebook"
                                 label="Facebook Login"
                                 />
 

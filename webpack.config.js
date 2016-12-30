@@ -1,13 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var BUILD_DIR = path.resolve(__dirname, 'dist/');
- 
+
 var config = {
   entry: [
     'webpack-hot-middleware/client',
     './src/js/main.js'
   ],
-  output: { 
+  output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
   },
@@ -20,7 +20,7 @@ var config = {
       {
         test: /\.jsx?$/,
         loader: 'babel',
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         include: __dirname,
         query: {
           presets: ['es2015', 'react', 'stage-0']

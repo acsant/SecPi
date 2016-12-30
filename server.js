@@ -3,6 +3,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
 var config = require('./webpack.config')
 var express = require('express')
+var User = require('./models/user')
 var app = new express()
 var port = 8080
 var compiler = webpack(config)
@@ -48,6 +49,16 @@ require('./config/passport_init')(passport)
 
 app.use(express.static(__dirname))
 
+/**
+   * Handle Cors requests
+   */
+  app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Header", "Origin, X-Requested-With, " +
+        "Content-Type, Accept");
+    next();
+  });
+
 app.get("/home", function (req, res) {
 	res.sendFile(path.resolve(__dirname, 'index.html'))
 })
@@ -77,14 +88,25 @@ app.post('/', passport.authenticate('local-login', {
 }))
 
 // Passport
-app.get('/auth/facebook', 
+app.get('/auth/facebook',
 	passport.authenticate('facebook', {scope: ['email']})
 )
 
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
-		successRedirect: '/home',
 		failureRedirect: '/',
 		scope: ['email']
-	})
+	}), function (req, res) {
+		res.redirect('/home?id=' + req.user.id);
+	}
 )
+
+app.get('/user', function (req, res) {
+	let userId = req.query.id
+	User.findOne({'_id': userId}).exec(function (err, user) {
+		if (err)
+			res.json(404, {message: 'User Not Found'})
+		else
+			res.send(user)
+	})
+})
