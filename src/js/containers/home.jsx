@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Paper from 'material-ui/Paper';
 import SecPiActions from '../actions/SecPiActions';
+import ServerActions from '../actions/ServerActions';
+import AuthenticationStore from '../stores/AuthenticationStore';
 
 require('./_home.scss');
 require('react-bootstrap');
@@ -13,12 +15,12 @@ class Home extends React.Component {
 		super(props, context);
 	}
 
-	componentWillMount() {
-		SecPiActions.getCurrentUser(this.props.location.query.id);
+	componentDidMount () {
+		ServerActions.getCurrentUser(this.props.location.query.id);
 	}
 
-	componentDidMount () {
-		console.log("Home Component rendered " + this.props.location.query.id);
+	componentWillUnmount() {
+
 	}
 
 	render () {

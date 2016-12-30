@@ -24,7 +24,6 @@ class Login extends React.Component {
         this.showSessionMsg=props.location.query ? props.location.query.session:true;
         this._handlePasswordChange = _handlePasswordChange.bind(this);
         this._handleEmailChange = _handleEmailChange.bind(this);
-        console.log("login called");
     }
 
     render() {

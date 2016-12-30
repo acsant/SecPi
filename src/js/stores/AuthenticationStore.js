@@ -13,21 +13,15 @@ var auth_token = {
 	token: null
 };
 
-/**
-* Login storage to store token
-* @param {string, string} email and access token - > null if locally logged in
-*/
-var loginStorage = function (email, token) {
-	auth_token.id = id;
-	auth_token.email = email;
-	auth_token.token = token;
-};
-
-var getLoginAuthToken = function () {
-	return auth_token;
-}
-
 var AuthenticationStore = assign({}, EventEmitter.prototype, {
+
+	/**
+	* Login storage to store token
+	*/
+	loginStorage: function () {
+		return auth_token;
+	},
+
 	emitChange: function () {
 		this.emit(CHANGE_EVENT);
 	},
@@ -46,7 +40,12 @@ AppDispatcher.register(function (payload) {
 	var action = payload.action;
 	switch (payload.source) {
 		case SecPiConstants.LOGIN:
-			loginStorage(action.userId, action.email, action.access_token);
+			auth_token = {
+				id: action.userId,
+				email: action.email,
+				access_token:
+				action.access_token
+			};
 			AuthenticationStore.emitChange();
 			break;
 

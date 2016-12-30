@@ -9,8 +9,10 @@ module.exports = {
                 .query({id: userId})
                 .end(function(err, res) {
                     if (err) return console.error(err);
-
-                    SecPiActions.login(res.body.fb.id, res.body.fb.email, res.body.fb.auth_token);
+                    var userId = res.body.fb.id;
+                    var email = res.body.fb.email;
+                    var token = res.body.fb.access_token;
+                    SecPiActions.login(userId, email, token);
                 });;
     }
 };

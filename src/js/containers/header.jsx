@@ -11,7 +11,6 @@ class Header extends React.Component {
 		super(props, context);
 		this.state = {};
 		this.state.open = false;
-		console.log("header rendered");
 	}
 
 	render () {
@@ -47,4 +46,4 @@ class Header extends React.Component {
 	}
 };
 
-export default Header; 
+export default Header;

@@ -9,7 +9,6 @@ var currentStream = '';
 
 var SecPiStore = assign({}, EventEmitter.prototype, {
 	emitChange: function () {
-		console.log("Change emitted");
 		this.emit(CHANGE_EVENT);
 	},
 

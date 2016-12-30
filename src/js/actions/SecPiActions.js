@@ -1,22 +1,8 @@
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 var SecPiConstants = require('../constants/SecPiConstants');
 var AuthenticationStore = require('../stores/AuthenticationStore');
-var FBAuthenticate = require('../services/FBAuthenticate');
 
 var SecPiActions = {
-	/**
-	* Authenticate with fb
-	*/
-	getCurrentUser: function (userId) {
-		AppDispatcher.handleRequestAction(
-			{
-				actionType: SecPiConstants.GET_USER,
-				userId: this.userId
-			}
-		);
-		FBAuthenticate.getCurrentUser(userId);
-	},
-
 	/**
 	* Local/facebook login
 	* @param {String} id
@@ -27,11 +13,12 @@ var SecPiActions = {
 		AppDispatcher.handleLoginAction(
 			{
 				actionType: SecPiConstants.LOGIN,
-				userId: this.id,
-				email: this.email,
-				token: this.access_token
+				userId: id,
+				email: email,
+				access_token: access_token
 			}
 		);
 	}
+
 };
 module.exports = SecPiActions;

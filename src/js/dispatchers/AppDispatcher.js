@@ -8,7 +8,6 @@ AppDispatcher.handleLoginAction = function (action) {
 		{
 			source: SecPiConstants.LOGIN,
 			action: action
-
 		}
 	);
 };
